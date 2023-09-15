@@ -26,6 +26,7 @@ const onSubmit = () => {
     emits('add', model.value);
     if (res.value) {
       res.value.blur();
+      model.value = '';
     }
   }
 };
