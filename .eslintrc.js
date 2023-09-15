@@ -9,6 +9,7 @@ module.exports = {
     '@typescript-eslint/no-this-alias': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'vue/multi-word-component-names': 'off',
   },
   parser: 'vue-eslint-parser',
   parserOptions: {

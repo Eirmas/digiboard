@@ -1,6 +1,6 @@
 import App from '../App.vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import HelloWorld from '../components/HelloWorld.vue';
+import Index from "@/pages/Index.vue";
 
 const routes: Readonly<RouteRecordRaw[]> = [
   {
@@ -9,7 +9,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
     children: [
       {
         path: '',
-        component: HelloWorld,
+        component: Index,
       },
     ],
   },
