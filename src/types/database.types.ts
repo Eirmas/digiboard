@@ -1,3 +1,5 @@
+import { NoteType } from "@/components/note/types";
+
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export interface Database {
@@ -50,27 +52,27 @@ export interface Database {
       };
       note: {
         Row: {
-          category_id: number | null;
+          board_id: number | null;
           created_at: string;
           id: number;
           text: string | null;
-          type: string | null;
+          type: NoteType | null;
           visible: boolean | null;
         };
         Insert: {
-          category_id?: number | null;
+          board_id?: number | null;
           created_at?: string;
           id?: number;
           text?: string | null;
-          type?: string | null;
+          type?: NoteType | null;
           visible?: boolean | null;
         };
         Update: {
-          category_id?: number | null;
+          board_id?: number | null;
           created_at?: string;
           id?: number;
           text?: string | null;
-          type?: string | null;
+          type?: NoteType | null;
           visible?: boolean | null;
         };
         Relationships: [];

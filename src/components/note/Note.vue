@@ -3,7 +3,7 @@
     <div class="app-note-content">
       <span v-if="hasValue">{{ text }}</span>
       <div v-else>
-        <textarea v-model="model" placeholder="Write" @submit="onSubmit"></textarea>
+        <textarea ref="res" v-model="model" placeholder="Write" @keypress.enter="onSubmit"></textarea>
       </div>
     </div>
   </div>
@@ -14,6 +14,7 @@ import './Note.scss';
 import { computed, ref } from 'vue';
 import { NoteType } from './types';
 
+const res = ref<HTMLTextAreaElement | null>(null);
 const model = ref('');
 
 const emits = defineEmits<{
@@ -23,14 +24,17 @@ const emits = defineEmits<{
 const onSubmit = () => {
   if (model.value.length > 0) {
     emits('add', model.value);
+    if (res.value) {
+      res.value.blur();
+    }
   }
 };
 
 const props = withDefaults(
   defineProps<{
-    type: NoteType;
-    text?: string;
-    visible?: boolean;
+    type: NoteType | null;
+    text: string | null;
+    visible: boolean | null;
   }>(),
   {
     type: NoteType.GOOD,

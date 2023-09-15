@@ -1,5 +1,5 @@
 .app-note {
-  @apply flex flex-col p-4 rounded-sm w-[256px] text-ellipsis overflow-hidden;
+  @apply flex flex-col p-4 rounded-sm w-[256px] text-ellipsis overflow-hidden text-primary-50;
 
   &-full {
     @apply h-[256px];

@@ -30,6 +30,7 @@ import { onMounted, ref } from 'vue';
 import { supabase } from '../client';
 import { createBoard, getBoard } from '@/services/digiboard.service.ts';
 import Button from '@/components/button/Button.vue';
+import { Board } from '@/types/domain-models';
 
 defineProps<{ msg: string }>();
 
@@ -41,8 +42,7 @@ onMounted(async () => {
 
   supabase
     .channel('any')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'board' }, payload => {
-      console.log('Change received!', payload.new);
+    .on<Board>('postgres_changes', { event: '*', schema: 'public', table: 'board' }, payload => {
       boards.value = [...(boards.value ?? []), payload.new];
     })
     .subscribe();
@@ -50,10 +50,6 @@ onMounted(async () => {
 
 const onAddBoard = async () => {
   await createBoard({ name: boardName.value });
-};
-
-const openBoard = (boardId: string) => {
-  console.log(boardId);
 };
 </script>
 
