@@ -1,0 +1,248 @@
+@mixin font-h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.025rem;
+  
+    @screen md {
+      font-size: 3rem;
+    }
+  }
+  
+  @mixin font-h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.025rem;
+  
+    @screen md {
+      font-size: 2rem;
+    }
+  }
+  
+  @mixin font-h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.025rem;
+  
+    @screen md {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @mixin font-h4 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.0125rem;
+  
+    @screen md {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @mixin font-body-large {
+    font-size: 1;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0rem;
+  
+    @screen md {
+      font-size: 1.125rem;
+    }
+  }
+  
+  @mixin font-body-bold {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: calc(1.25 / 0.875);
+    letter-spacing: 0.0125rem;
+  
+    @screen md {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+  
+  @mixin font-body {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: calc(1.25 / 0.875);
+    letter-spacing: 0rem;
+  
+    @screen md {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+  
+  @mixin font-body-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0rem;
+  
+    @screen md {
+      font-size: 1rem;
+    }
+  }
+  
+  @mixin font-body-small-bold {
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.025rem;
+  
+    @screen md {
+      font-size: 0.875rem;
+      line-height: calc(1.25 / 0.875);
+    }
+  }
+  
+  @mixin font-body-small {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0rem;
+  
+    @screen md {
+      font-size: 0.875rem;
+      line-height: calc(1.25 / 0.875);
+    }
+  }
+  
+  @mixin font-body-link-small {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0rem;
+  
+    @screen md {
+      font-size: 0.875rem;
+    }
+  }
+  
+  :root {
+    --app-font-button-font-size: 0.875rem;
+  
+    @screen md {
+      --app-font-button-font-size: 1rem;
+    }
+  }
+  @mixin font-button {
+    font-size: var(--app-font-button-font-size);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.025rem;
+  }
+  
+  :root {
+    --app-font-button-small-font-size: 0.75rem;
+  
+    @screen md {
+      --app-font-button-small-font-size: 0.875rem;
+    }
+  }
+  @mixin font-button-small {
+    font-size: var(--app-font-button-small-font-size);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.025rem;
+  }
+  
+  @mixin font-caption {
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00625rem;
+  
+    @screen md {
+      font-size: 0.75rem;
+    }
+  }
+  
+  $defaultFamily: Nunito Sans, Helvetica Neue, sans-serif;
+  
+  @mixin typography($family: $defaultFamily) {
+    @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+  
+    html {
+      font-family: $family;
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  
+    p {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  
+    h1,
+    .font-h1 {
+      @include font-h1;
+    }
+  
+    h2,
+    .font-h2 {
+      @include font-h2;
+    }
+  
+    h3,
+    .font-h3 {
+      @include font-h3;
+    }
+  
+    h4,
+    .font-h4 {
+      @include font-h4;
+    }
+  
+    .font-body-large {
+      @include font-body-large;
+    }
+  
+    .font-body-bold {
+      @include font-body-bold;
+    }
+  
+    .font-body {
+      @include font-body;
+    }
+  
+    .font-body-link {
+      @include font-body-link;
+    }
+  
+    .font-body-small-bold {
+      @include font-body-small-bold;
+    }
+  
+    .font-body-small {
+      @include font-body-small;
+    }
+  
+    .font-body-link-small {
+      @include font-body-link-small;
+    }
+  
+    .font-button {
+      @include font-button;
+    }
+  
+    .font-button-small {
+      @include font-button-small;
+    }
+  
+    .font-caption {
+      @include font-caption;
+    }
+  }
