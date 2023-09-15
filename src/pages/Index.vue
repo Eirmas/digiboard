@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { supabase } from '../client';
+import {createBoard, getBoard} from "@/services/digiboard.service.ts";
+
 defineProps<{ msg: string }>();
 
 const boards = ref<any[] | null>([]);
 const boardName = ref('');
 
 onMounted(async () => {
-  const { data } = await supabase
-    .from('board')
-    .select();
-  boards.value = data;
+  boards.value = await getBoard();
 
   supabase
     .channel('any')
@@ -23,9 +22,7 @@ onMounted(async () => {
 });
 
 const onAddBoard = async () => {
-  supabase
-    .from('board')
-    .insert({ name: boardName.value });
+  await createBoard({ name: boardName.value });
 };
 </script>
 

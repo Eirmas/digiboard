@@ -16,16 +16,16 @@ export type Notes = {
     visible?: boolean | null
 }
 
-const createBoard = async (board: Board): Promise<void> => {
+export const createBoard = async (board: Board): Promise<void> => {
     await supabase.from('board').insert(board)
 }
 
-const getBoard = async (): Promise<Board[]> => {
+export const getBoard = async (): Promise<Board[]> => {
     const { data} = await supabase.from('board').select()
     return data as Board[];
 }
 
-const getNotesByBoardId = async (): Promise<Notes[]> => {
+export const getNotesByBoardId = async (): Promise<Notes[]> => {
     const { data} = await supabase.from('note').select()
     return data as Notes[];
 }
