@@ -1,4 +1,4 @@
-import Board from '../pages/Board.vue';
+import Board from '@/pages/Board.vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Index from '@/pages/Index.vue';
 

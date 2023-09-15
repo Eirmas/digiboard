@@ -51,6 +51,10 @@ onMounted(async () => {
 const onAddBoard = async () => {
   await createBoard({ name: boardName.value });
 };
+
+const openBoard = (boardId: string) => {
+  console.log(boardId);
+};
 </script>
 
 <style scoped>

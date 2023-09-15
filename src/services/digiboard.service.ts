@@ -7,7 +7,7 @@ export type Board = {
   timestamp?: string | null;
 };
 
-export type Notes = {
+export type Note = {
   category_id?: number | null;
   created_at?: string;
   id?: number;
@@ -25,9 +25,13 @@ export const getBoard = async (): Promise<Board[]> => {
     return data as Board[];
 }
 
-export const getNotesByBoardId = async (): Promise<Notes[]> => {
-    const { data} = await supabase.from('note').select()
-    return data as Notes[];
+export const getNotesByBoardId = async (id: number): Promise<Note[]> => {
+    const { data} = await supabase.from('note').select().eq('board_id', id)
+    return data ?? [] as Note[];
+}
+
+export const createNote = async (note: Note): Promise<void> => {
+    await supabase.from('note').insert(note)
 }
 
 
