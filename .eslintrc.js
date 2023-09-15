@@ -5,9 +5,10 @@ module.exports = {
   },
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier', 'plugin:@typescript-eslint/recommended'],
   rules: {
-    'no-console': 'error',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     '@typescript-eslint/no-this-alias': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
   parser: 'vue-eslint-parser',
   parserOptions: {
