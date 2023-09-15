@@ -1,20 +1,20 @@
-import {supabase} from "@/client.ts";
+import { supabase } from '@/client.ts';
 
 export type Board = {
-    name: string
-    owner_id?: number | null
-    timer_id?: number | null
-    timestamp?: string | null
-}
+  name: string;
+  owner_id?: number | null;
+  timer_id?: number | null;
+  timestamp?: string | null;
+};
 
 export type Notes = {
-    category_id?: number | null
-    created_at?: string
-    id?: number
-    text?: string | null
-    type?: string | null
-    visible?: boolean | null
-}
+  category_id?: number | null;
+  created_at?: string;
+  id?: number;
+  text?: string | null;
+  type?: string | null;
+  visible?: boolean | null;
+};
 
 export const createBoard = async (board: Board): Promise<void> => {
     await supabase.from('board').insert(board)

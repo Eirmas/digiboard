@@ -1,5 +1,26 @@
+<template>
+  <Note></Note>
+  <h1>Boards</h1>
+
+  <div>
+    <h2>Add new board</h2>
+    <div>
+      <input v-model="boardName" type="text" placeholder="Board name" />
+    </div>
+    <div>
+      <button type="button" @click="onAddBoard">Add</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div v-for="(board, i) in boards" :key="i" class="board">
+      <router-link :to="`/${board.id}`">{{ board.name }}</router-link>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
 import { supabase } from '../client';
 import {createBoard, getBoard} from "@/services/digiboard.service.ts";
 
@@ -14,11 +35,10 @@ onMounted(async () => {
   supabase
     .channel('any')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'board' }, payload => {
-      console.log('Change received!', payload.new)
-      boards.value = [...boards.value ?? [], payload.new];
+      console.log('Change received!', payload.new);
+      boards.value = [...(boards.value ?? []), payload.new];
     })
-    .subscribe()
-
+    .subscribe();
 });
 
 const onAddBoard = async () => {
@@ -26,46 +46,12 @@ const onAddBoard = async () => {
 };
 </script>
 
-<template>
-  <h1>Boards</h1>
-
-  <div>
-    <h2>Add new board</h2>
-    <div>
-      <input
-        type="text"
-        v-model="boardName"
-        placeholder="Board name"
-      />
-    </div>
-    <div>
-      <button
-        type="button"
-        @click="onAddBoard"
-      >Add</button>
-    </div>
-
-  </div>
-
-  <div class="container">
-
-    <div
-      v-for="(board, i) in boards"
-      :key="i"
-      class="board"
-    >
-      <router-link :to="`/${board.id}`">{{ board.name }}</router-link>
-    </div>
-  </div>
-</template>
-
 <style scoped>
 .container {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-
 
 .board {
   height: 100px;

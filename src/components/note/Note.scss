@@ -1,0 +1,29 @@
+.app-note {
+  @apply flex flex-col p-4 rounded-sm w-[256px] text-ellipsis overflow-hidden;
+
+  &-full {
+    @apply h-[256px];
+  }
+
+  &-type {
+    &-good {
+      @apply bg-semantic-300;
+    }
+
+    &-bad {
+      @apply bg-semantic-100;
+    }
+
+    &-action {
+      @apply bg-semantic-50;
+    }
+  }
+
+  textarea {
+    @apply bg-transparent border-none w-full outline-none resize-none text-primary-50;
+  }
+
+  &-hidden span {
+    filter: blur(20px);
+  }
+}
