@@ -1,20 +1,26 @@
 <template>
-  <Note></Note>
-  <h1>Boards</h1>
+  <div class="max-w-xl mx-auto my-10 flex flex-col gap-y-4">
+    <h1>Digiboard</h1>
 
-  <div>
-    <h2>Add new board</h2>
-    <div>
-      <input v-model="boardName" type="text" placeholder="Board name" />
-    </div>
-    <div>
-      <button type="button" @click="onAddBoard">Add</button>
-    </div>
-  </div>
+    <hr class="my-4 border-primary-400" />
 
-  <div class="container">
-    <div v-for="(board, i) in boards" :key="i" class="board">
-      <router-link :to="`/${board.id}`">{{ board.name }}</router-link>
+    <div class="border-2 flex flex-col rounded-sm py-4 px-8 gap-y-2">
+      <h3>Create board</h3>
+      <div class="flex gap-x-4">
+        <input v-model="boardName" type="text" class="grow rounded-sm pl-2" placeholder="Board name" />
+        <Button type="button" @click="onAddBoard">Add</Button>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-y-2">
+      <div v-for="(board, i) in boards" :key="i" class="rounded-sm border-primary-800 py-4 px-8 border-2">
+        <router-link :to="`/${board.id}`">
+          <div class="flex justify-between items-center">
+            <h4 class="font-body-bold">{{ board.name }}</h4>
+            <Button>Join</Button>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -22,7 +28,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { supabase } from '../client';
-import {createBoard, getBoard} from "@/services/digiboard.service.ts";
+import { createBoard, getBoard } from '@/services/digiboard.service.ts';
+import Button from '@/components/button/Button.vue';
 
 defineProps<{ msg: string }>();
 
