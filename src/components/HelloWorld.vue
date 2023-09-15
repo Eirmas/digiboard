@@ -1,41 +1,54 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { BeakerIcon } from '@heroicons/vue/24/solid';
-
+import { onMounted, ref } from 'vue'
+import { supabase } from '../client';
 defineProps<{ msg: string }>();
 
-const count = ref(0);
+const boards = ref<any[] | null>([]);
+
+onMounted(async () => {
+  const { data } = await supabase
+    .from('board')
+    .select();
+  boards.value = data;
+
+  supabase
+    .channel('any')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'board' }, payload => {
+      console.log('Change received!', payload.new)
+      boards.value = [...boards.value ?? [], payload.new];
+    })
+    .subscribe()
+
+});
+
+const boardName = ref('');
+const onAddBoard = async () => {
+  supabase
+    .from('board')
+    .insert({ name: boardName.value });
+};
+
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-    <p>
-      Check out the fancy icon:
-      <BeakerIcon class="h-6 w-6 text-blue-500 justify-center"></BeakerIcon>
-    </p>
+  <div
+    v-for="(board, i) in boards"
+    :key="i"
+  >
+    {{ board.id }} - {{ board.name }}
   </div>
 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <div class="card">
+    <input
+      type="text"
+      v-model="boardName"
+      placeholder="Board name"
+    />
+    <button
+      type="button"
+      @click="onAddBoard"
+    >Add board</button>
+  </div>
 </template>
-
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>
